@@ -1,0 +1,75 @@
+/* Navbar dropdown: hidden by default and opened with the .show class. */
+nav a,
+.dropdown-button {
+  font: 11px 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-button {
+  padding: 5px 0;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+}
+
+.dropdown-button:hover,
+.dropdown-button[aria-expanded="true"] {
+  color: var(--pink);
+  border-color: var(--pink);
+}
+
+.dropdown-arrow {
+  display: inline-block;
+  font-size: .7em;
+  transition: transform .2s;
+}
+
+.dropdown-button[aria-expanded="true"] .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  z-index: 10;
+  min-width: 185px;
+  margin: 0;
+  padding: 7px 13px;
+  transform: translateX(-50%);
+  list-style: none;
+  background: var(--cream);
+  border: 1px solid var(--ink);
+  box-shadow: 5px 5px var(--pink);
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu li {
+  padding: 0;
+  border: 0;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 8px 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 800px) {
+  .dropdown-menu {
+    position: static;
+    margin: 6px 0 0;
+    transform: none;
+  }
+}

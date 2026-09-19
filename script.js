@@ -1,5 +1,52 @@
 const menuButton = document.querySelector('.menu-toggle');
 const nav = document.querySelector('nav');
+const dropdownButton = document.querySelector('#dropdownBtn');
+const dropdownMenu = document.querySelector('#dropdownMenu');
+
+dropdownButton?.addEventListener('click', (event) => {
+  event.stopPropagation();
+  const isOpen = dropdownMenu.classList.toggle('show');
+  dropdownButton.setAttribute('aria-expanded', String(isOpen));
+});
+
+document.addEventListener('click', (event) => {
+  if (!event.target.closest('.dropdown')) {
+    dropdownMenu?.classList.remove('show');
+    dropdownButton?.setAttribute('aria-expanded', 'false');
+  }
+});
+
+dropdownMenu?.addEventListener('click', () => {
+  dropdownMenu.classList.remove('show');
+  dropdownButton.setAttribute('aria-expanded', 'false');
+});
+
+const galleryButton = document.querySelector('.project-gallery-trigger');
+const galleryModal = document.querySelector('#trackerGallery');
+const galleryCloseButton = document.querySelector('.project-modal-close');
+
+function closeProjectGallery() {
+  galleryModal.hidden = true;
+  galleryModal.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('gallery-open');
+  galleryButton.focus();
+}
+
+galleryButton?.addEventListener('click', () => {
+  galleryModal.hidden = false;
+  galleryModal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('gallery-open');
+  galleryCloseButton.focus();
+});
+
+galleryCloseButton?.addEventListener('click', closeProjectGallery);
+galleryModal?.addEventListener('click', (event) => {
+  if (event.target === galleryModal) closeProjectGallery();
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && !galleryModal.hidden) closeProjectGallery();
+});
+
 menuButton?.addEventListener('click', () => {
   const open = nav.classList.toggle('open');
   menuButton.setAttribute('aria-expanded', String(open));
